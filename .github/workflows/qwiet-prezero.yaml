@@ -19,12 +19,13 @@ on:
 jobs:
   NextGen-Static-Analysis:
     runs-on: ubuntu-latest
+    container: shiftleft/core:latest
     steps:
     - uses: actions/checkout@v4
   
     - name: Gradle dependency builder
       run: |
-        gradlew build
+        gradle build
     
     - name: Qwiet-AllInOne-Scan
       uses: elangosenthilnathan/Qwiet-preZero@main
