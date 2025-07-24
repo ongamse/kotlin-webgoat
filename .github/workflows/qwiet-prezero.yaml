@@ -1,0 +1,38 @@
+---
+# This workflow integrates qwiet.ai preZero with GitHub
+# Visit https://docs.shiftleft.io for help
+name: QwietAI-PreZero-Scan
+
+permissions:
+  actions: read
+  contents: read
+  security-events: write
+
+on:
+  pull_request:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  NextGen-Static-Analysis:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+  
+    - name: Gradle dependency builder
+      run: |
+        gradlew build
+    
+    - name: Qwiet-AllInOne-Scan
+      uses: elangosenthilnathan/Qwiet-preZero@main
+      with:
+        shiftleft-access-token: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
+        excludeRegex: ".*(test|Readmes).*$"
+        importGitHub: false
+        verbose: false
+        strict: false
+        wait: true
+        timeout: 30m
