@@ -42,6 +42,6 @@ jobs:
         curl https://cdn.shiftleft.io/download/sl > ${GITHUB_WORKSPACE}/sl && chmod a+rx ${GITHUB_WORKSPACE}/sl
 
     - name: NextGen Static Analysis
-      run: SHIFTLEFT_SBOM_GENERATOR=1 ${GITHUB_WORKSPACE}/sl analyze --strict --wait --app QwietKotlin --verbose --tag branch=${{ github.head_ref || steps.extract_branch.outputs.branch }}
+      run: SHIFTLEFT_SBOM_GENERATOR=1 ${GITHUB_WORKSPACE}/sl analyze --strict --wait --app QwietKotlin --verbose --tag branch=${{ github.head_ref || steps.extract_branch.outputs.branch }} --kotlin .
       env:
         SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
