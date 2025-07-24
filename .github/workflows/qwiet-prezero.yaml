@@ -32,7 +32,7 @@ jobs:
       run: chmod +x gradlew
 
     - name: Check Dependencies with Gradle
-      run: ./gradlew depenencies
+      run: ./gradlew dependencies
       
     - name: Build with Gradle
       run: ./gradlew build
